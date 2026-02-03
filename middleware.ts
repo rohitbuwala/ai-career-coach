@@ -12,11 +12,12 @@ export async function middleware(req: NextRequest) {
       new URL("/dashboard", req.url)
     );
   }
+const token = await getToken({
+  req,
+  secret: process.env.NEXTAUTH_SECRET,
+  secureCookie: process.env.NODE_ENV === "production",
+});
 
-  const token = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
 
   const isLoggedIn = !!token;
 
