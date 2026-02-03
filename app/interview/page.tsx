@@ -4,16 +4,18 @@ import { useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import AnimatedCard from "@/components/AnimatedCard";
 
 export default function InterviewPage() {
+
   const [question, setQuestion] = useState(
-    "Click Start to begin interview"
+    "Click Start to begin your smart AI interview 🚀"
   );
+
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Start Interview
   const startInterview = async () => {
     try {
       setLoading(true);
@@ -23,14 +25,15 @@ export default function InterviewPage() {
       });
 
       setQuestion(res.data.question);
-      setFeedback("");
       setAnswer("");
+      setFeedback("");
 
     } finally {
       setLoading(false);
     }
   };
 
+  // Submit Answer
   const submitAnswer = async () => {
     try {
       setLoading(true);
@@ -50,101 +53,124 @@ export default function InterviewPage() {
     }
   };
 
-return (
-  <div className="min-h-[80vh] flex flex-col justify-center space-y-8">
+  return (
 
-    {/* Title */}
-    <h1 className="text-4xl font-bold text-indigo-400 text-center">
-      AI Mock Interview
-    </h1>
+    <div className="min-h-[80vh] max-w-7xl mx-auto px-4 py-12 space-y-14">
 
-    {/* Panels */}
-    <div className="grid md:grid-cols-2 gap-8">
+      {/* Header */}
+      <div className="text-center space-y-3">
 
-      {/* AI Panel */}
-      <div className="gradient-card">
-        <div className="text-center space-y-4">
+        <h1 className="text-5xl font-bold gradient-animate glow-text">
+          AI Mock Interview
+        </h1>
 
-          <div className="w-20 h-20 mx-auto rounded-full bg-indigo-600/20 flex items-center justify-center text-3xl">
-            🤖
-          </div>
+        <p className="text-lg text-slate-400">
+          Train with AI • Improve Confidence • Crack Interviews 💼🔥
+        </p>
 
-          <h2 className="font-semibold text-lg">
-            AI Interviewer
-          </h2>
+        <p className="text-sm text-slate-500">
+          Real-time feedback • Smart questions • Career growth
+        </p>
 
-          <p className="text-slate-300 leading-relaxed">
-            {question}
-          </p>
-
-        </div>
       </div>
 
-      {/* User Panel */}
-      <div className="gradient-card">
-        <div className="space-y-4">
+      {/* Panels */}
+      <div className="grid md:grid-cols-2 gap-10">
 
-          <div className="w-20 h-20 mx-auto rounded-full bg-cyan-600/20 flex items-center justify-center text-3xl">
-            👤
+        {/* AI Panel */}
+        <div className="gradient-card">
+
+          <div className="text-center space-y-5">
+
+            <div className="w-24 h-20 mx-auto rounded-full bg-indigo-600/20 flex items-center justify-center text-4xl">
+              🤖
+            </div>
+
+            <h2 className="font-semibold text-xl gradient-animate">
+              AI Interviewer
+            </h2>
+
+            <p className="text-slate-300 leading-relaxed min-h-[80px]">
+              {question}
+            </p>
+
+            <p className="text-xs text-slate-500">
+              Powered by Smart AI Engine ⚡
+            </p>
+
           </div>
 
-          <h2 className="font-semibold text-lg text-center">
-            You
-          </h2>
+        </div>
 
-          <Textarea
-            placeholder="Type your answer..."
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            className="bg-black/40 border-white/10 min-h-[140px]"
-          />
+        {/* User Panel */}
+        <div className="gradient-card">
+
+          <div className="space-y-5">
+
+            <div className="w-24 h-20 mx-auto rounded-full bg-cyan-600/20 flex items-center justify-center text-4xl">
+              👤
+            </div>
+
+            <h2 className="font-semibold text-xl text-center gradient-animate">
+              You
+            </h2>
+
+            <Textarea
+              placeholder="Type your confident answer here..."
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="bg-black/40 border-white/10 min-h-[160px] resize-none text-slate-200"
+            />
+
+            <p className="text-xs text-slate-500 text-center">
+              Tip: Answer clearly & confidently ✨
+            </p>
+
+          </div>
 
         </div>
+
       </div>
 
-    </div>
+      {/* Buttons */}
+      <div className="flex flex-col sm:flex-row justify-center gap-5">
 
-    {/* Controls */}
-    <div className="flex justify-center gap-4">
+        <Button
+          onClick={startInterview}
+          disabled={loading}
+          className="bg-indigo-600 hover:bg-indigo-700 glow-btn px-10 py-6 text-lg"
+        >
+          {loading ? "Preparing AI..." : "🚀 Start Interview"}
+        </Button>
 
-      <Button
-        onClick={startInterview}
-        disabled={loading}
-        className="bg-indigo-600 hover:bg-indigo-700 glow-btn px-8"
-      >
-        {loading ? "Loading..." : "Start"}
-      </Button>
+        <Button
+          onClick={submitAnswer}
+          disabled={!answer || loading}
+          variant="outline"
+          className="px-10 py-6 text-lg border-indigo-500/50"
+        >
+          📤 Submit Answer
+        </Button>
 
-      <Button
-        onClick={submitAnswer}
-        disabled={!answer || loading}
-        variant="outline"
-        className="px-8"
-      >
-        Submit
-      </Button>
+      </div>
 
-    </div>
+      {/* Feedback */}
+      {feedback && (
 
-    {/* Feedback */}
-    {feedback && (
+        <div className="gradient-card max-w-3xl mx-auto">
 
-      <div className="gradient-card max-w-3xl mx-auto">
-        <div>
-
-          <h3 className="text-green-400 font-semibold">
-            AI Feedback
+          <h3 className="font-semibold text-lg gradient-animate mb-3">
+            AI Feedback & Improvement Tips 💡
           </h3>
 
-          <p className="text-slate-300 mt-2 leading-relaxed">
+          <p className="text-slate-300 leading-relaxed whitespace-pre-line">
             {feedback}
           </p>
 
         </div>
-      </div>
-    )}
 
-  </div>
-);
+      )}
 
+    </div>
+  );
 }

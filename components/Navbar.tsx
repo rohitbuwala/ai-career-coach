@@ -20,9 +20,9 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/60 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/70 backdrop-blur-xl">
 
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
 
         {/* Logo */}
         <Link
@@ -32,8 +32,8 @@ export default function Navbar() {
           AI Career Coach
         </Link>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Desktop Right Menu */}
+        <nav className="hidden md:flex items-center gap-6">
 
           {navItems.map((item) => {
 
@@ -57,11 +57,7 @@ export default function Navbar() {
             );
           })}
 
-        </nav>
-
-        {/* Right Auth */}
-        <div className="hidden md:flex items-center gap-4">
-
+          {/* Auth */}
           {status === "loading" ? (
             <p className="text-slate-400 text-sm">
               Loading...
@@ -86,9 +82,9 @@ export default function Navbar() {
             </Link>
           )}
 
-        </div>
+        </nav>
 
-        {/* Mobile Button */}
+        {/* Mobile Toggle */}
         <button
           className="md:hidden text-slate-200"
           onClick={() => setOpen(!open)}
@@ -101,7 +97,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {open && (
 
-        <div className="md:hidden border-t border-white/10 bg-black/95">
+        <div className="md:hidden bg-black/95 border-t border-white/10">
 
           <nav className="flex flex-col gap-4 p-5">
 
@@ -128,7 +124,8 @@ export default function Navbar() {
               );
             })}
 
-            <div className="pt-2 border-t border-white/10">
+            {/* Mobile Auth */}
+            <div className="pt-3 border-t border-white/10">
 
               {status === "loading" ? (
                 <p className="text-slate-400 text-sm">
