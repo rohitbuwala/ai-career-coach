@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 
 import User from "@/models/User";
 import { connectDB } from "@/lib/db";
+
 export const authOptions: AuthOptions = {
 
   providers: [
@@ -35,7 +36,7 @@ export const authOptions: AuthOptions = {
 
         const isValid = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.password   
         );
 
         if (!isValid) {

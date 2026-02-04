@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
 
   const pathname = req.nextUrl.pathname;
 
-  // 👉 Always redirect / to /dashboard
+  // Always redirect / to /dashboard
   if (pathname === "/") {
     return NextResponse.redirect(
       new URL("/dashboard", req.url)
